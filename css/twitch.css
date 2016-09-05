@@ -1,0 +1,46 @@
+.title {
+    font-size: 24px;
+}
+
+div {
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+img {
+    width: 100px;
+}
+
+a:link {
+    color: black;
+    text-decoration: none;
+}
+
+a:visited {
+    color: black;
+}
+
+button {
+    margin-left: 20px;
+}
+
+#pageContent {
+    width: 50%;
+    background-color: white;
+    margin-top: 0px;
+    height: 100%;
+    padding: 0 20px 0;
+
+    /*margin-left: 1px;
+    margin-right: 1px;*/
+}
+
+body {
+    background-color: #999;
+}
+
+.searchResult {
+    border: 1px solid black;
+    padding: 5px;
+    background-color: #EEE;  
+}
