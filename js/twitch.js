@@ -12,28 +12,19 @@ var wikki = (function () {
         $('button').click(function () {
             searchButton_click();
         });
-        $('#searchText').keydown(function (e) {
-            searchText_onKeyDown(e.keyCode);
-        });
+
     }
 
     function searchButton_click() {
         $.when(getSearchResults())
-        .then(displaySearchResults)
-        .then($('#searchText').val(''));
-    }
-
-    function searchText_onKeyDown(keyCode) {
-        if (13 === keyCode) {
-            $('button').click();
-        }
+        .then(displaySearchResults);
     }
 
     function getSearchResults() {
-        var searchText = encodeURIComponent($('#searchText').val());
-        var searchUrl = "https://api.twitch.tv/kraken/streams/ESL_SC2?callback=?";
-        //var searchUrl = "https://api.twitch.tv/kraken/streams/cretetion?callback=?";
-        //https://api.twitch.tv/kraken/streams?game=StarCraft+II%3A+Heart+of+the+Swarm&channel=test_channel,test_channel2
+        var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
+        var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
+            channelsOfINterest.join(",") +
+            "&callback=?";
 
         return $.ajax({
             url: searchUrl,
