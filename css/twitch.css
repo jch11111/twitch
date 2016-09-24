@@ -1,5 +1,7 @@
-.title {
-    font-size: 24px;
+html, body, .fullHeight { 
+  margin:0; 
+  padding:0; 
+  height:100%; 
 }
 
 div {
@@ -29,12 +31,20 @@ button {
     margin-right: 1px;*/
 }
 
-body {
-    background-color: #999;
+@media (min-width: 625px) {
+    body {
+        background-color: #999;
+    }
+    .tabbedDialog {
+        width: 50%;
+        margin: 0 auto;
+    }
 }
+
 
 .searchResult {
     border: 1px solid black;
     padding: 5px;
     background-color: #EEE;  
 }
+

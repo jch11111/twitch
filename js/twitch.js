@@ -5,6 +5,7 @@ var wikki = (function () {
         $(function () {
             resultsDiv = $('#results');
             addEventHandlers();
+            RESPONSIVEUI.responsiveTabs();
         })
     };
 
