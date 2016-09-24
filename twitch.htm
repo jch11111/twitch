@@ -1,17 +1,27 @@
 <!DOCTYPE HTML>
 
 <html>
-    <head>
-        <link rel="stylesheet" href="css/twitch.css" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-        <script src="js/twitch.js"></script>
-    </head>
-    <body>
-        <div id="pageContent">
-            <div class="title">wikipedia search</div>
-            <div><input type="text" id="searchText" /><button>search</button></div>
-            <div><a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">random wikki article</a></div> 
-            <div id="results"></div>
+<head>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/twitch.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="js/twitch.js"></script>
+
+    <title>Twitcher</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <div id="pageContent container">
+        <div class="row">
+            <div class="twelve columns" style="margin-top: 10%">
+                <div class="title">wikipedia search</div>
+                <div><input type="text" id="searchText" /><button>search</button></div>
+                <div><a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">random wikki article</a></div>
+                <div id="results"></div>
+            </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>
