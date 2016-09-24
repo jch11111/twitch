@@ -18,17 +18,8 @@ var wikki = (function () {
 
     }
 
-    //function searchButton_click() {
-    //    $.when(getSearchResults())
-    //    .then(displaySearchResults);
-    //}
-
     function getSearchResults() {
         var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "thejwittz", "mineconstage", "rocketleague"]
-        //var channelsOfINterest = ["freecodecamp"];
-        //var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
-            //channelsOfINterest.join(",") +
-            //"&callback=?";
             var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
                 channelsOfINterest.join(",")
 
@@ -38,22 +29,7 @@ var wikki = (function () {
             headers: {
                 'Client-ID': '52vs4v2ix1m4sdsg9l0bqpk3y84lvxx'
             }
-            //success: function (data) {
-            //    console.log(data);
-            //},
-            //error: function (data) {
-            //    console.log(data);
-            //}
         });
-
-        //return $.ajax({
-        //    url: searchUrl,
-        //    headers: {
-        //        'Client-ID': '52vs4v2ix1m4sdsg9l0bqpk3y84lvxx'
-        //    },
-        //    dataType: 'json',
-        //    type: 'GET'
-        //});
     }
 
     function displaySearchResults(searchResults) {
@@ -90,8 +66,6 @@ var wikki = (function () {
     return {
         init: init
     };
-
-
 }());
 
 wikki.init();
