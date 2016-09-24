@@ -43,13 +43,13 @@ var wikki = (function () {
         console.log(searchResults.streams.length);
         resultsDiv.empty();
 
-        if (searchResults._links && searchResults._links.channel) {
-            displayHtml(searchResults._links.channel);
-        }
+        //if (searchResults._links && searchResults._links.channel) {
+        //    displayHtml(searchResults._links.channel);
+        //}
 
-        if (searchResults._links && searchResults._links.self) {
-            displayHtml(searchResults._links.self);
-        }
+        //if (searchResults._links && searchResults._links.self) {
+        //    displayHtml(searchResults._links.self);
+        //}
     }
 
     function displayError(err) {
