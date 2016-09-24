@@ -6,6 +6,8 @@ var wikki = (function () {
             resultsDiv = $('#results');
             addEventHandlers();
             RESPONSIVEUI.responsiveTabs();
+            $.when(getSearchResults())
+            .then(displaySearchResults, displayError);
         })
     };
 
@@ -16,30 +18,66 @@ var wikki = (function () {
 
     }
 
-    function searchButton_click() {
-        $.when(getSearchResults())
-        .then(displaySearchResults);
-    }
+    //function searchButton_click() {
+    //    $.when(getSearchResults())
+    //    .then(displaySearchResults);
+    //}
 
     function getSearchResults() {
-        var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas"]
-        var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
-            channelsOfINterest.join(",") +
-            "&callback=?";
+        var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "thejwittz", "mineconstage", "rocketleague"]
+        //var channelsOfINterest = ["freecodecamp"];
+        //var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
+            //channelsOfINterest.join(",") +
+            //"&callback=?";
+            var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
+                channelsOfINterest.join(",")
 
         return $.ajax({
+            type: 'GET',
             url: searchUrl,
-            dataType: 'json',
-            type: 'POST'
+            headers: {
+                'Client-ID': '52vs4v2ix1m4sdsg9l0bqpk3y84lvxx'
+            }
+            //success: function (data) {
+            //    console.log(data);
+            //},
+            //error: function (data) {
+            //    console.log(data);
+            //}
         });
+
+        //return $.ajax({
+        //    url: searchUrl,
+        //    headers: {
+        //        'Client-ID': '52vs4v2ix1m4sdsg9l0bqpk3y84lvxx'
+        //    },
+        //    dataType: 'json',
+        //    type: 'GET'
+        //});
     }
 
     function displaySearchResults(searchResults) {
+        if (searchResults.streams) {
+            searchResults.streams.forEach(function (stream) {
+                var channel = stream.channel;
+                console.log(channel.url);
+                console.log(channel.status);
+            });
+        }
+        console.log(searchResults.streams.length);
         resultsDiv.empty();
 
-        displayHtml(searchResults._links.channel);
-        displayHtml(searchResults._links.self);
+        if (searchResults._links && searchResults._links.channel) {
+            displayHtml(searchResults._links.channel);
+        }
 
+        if (searchResults._links && searchResults._links.self) {
+            displayHtml(searchResults._links.self);
+        }
+    }
+
+    function displayError(err) {
+        displayHtml(err);
     }
 
     function displayHtml(htmlContent) {

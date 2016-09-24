@@ -41,14 +41,16 @@ button {
     }
 }
 
-
-.searchResult {
-    border: 1px solid black;
-    padding: 5px;
-    background-color: #EEE;  
-}
-
 ul {
     margin-top: 3%;
 }
 
+.centerContent {
+    background-color: #FFF; 
+    height: 100%;
+    
+}
+
+.centerContent h2 {
+    margin-top: 5%;
+}
