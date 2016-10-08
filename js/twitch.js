@@ -19,7 +19,7 @@ var wikki = (function () {
     }
 
     function getSearchResults() {
-        var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "thejwittz", "mineconstage", "rocketleague"]
+        var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "thejwittz", "mineconstage", "rocketleague", "brucegrannec"]
             var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
                 channelsOfINterest.join(",")
 
