@@ -7,7 +7,7 @@ var wikki = (function () {
             addEventHandlers();
             RESPONSIVEUI.responsiveTabs();
             $.when(getSearchResults())
-            .then(displaySearchResults, displayError);
+            .then(displayChannels, displayError);
         })
     };
 
@@ -32,24 +32,72 @@ var wikki = (function () {
         });
     }
 
-    function displaySearchResults(searchResults) {
-        if (searchResults.streams) {
-            searchResults.streams.forEach(function (stream) {
-                var channel = stream.channel;
-                console.log(channel.url);
-                console.log(channel.status);
-            });
+    function displayChannels(searchResults) {
+        var onlineChannels = {},
+            channel;
+
+        if (!searchResults.streams) {
+            return;
         }
+
+        searchResults.streams.forEach(function (stream) {
+            if (!stream.channel) {
+                return;
+            }
+
+            channel = stream.channel;
+
+            if (!channel.name) {
+                return;
+            }
+
+            onlineChannels[channel.name] = {
+                name: channel.name,
+                url: channel.url || '#',
+                status: channel.status || 'status unavailable'
+            };
+            console.log(channel.name);
+            console.log(channel.url);
+            console.log(channel.status);
+        });
+
         console.log(searchResults.streams.length);
+        displayOnlineChannels();
         resultsDiv.empty();
+        
+        function displayOnlineChannels() {
+            var channel,
+                listItem,
+                onlineChannelsList = $('#onlineChannels'),
+                channelLink;
 
-        //if (searchResults._links && searchResults._links.channel) {
-        //    displayHtml(searchResults._links.channel);
-        //}
+            onlineChannelsList.empty();
+            for (channelName in onlineChannels) {
+                listItem = $('<li>');
+                //listItem.text(channelName + ' - ' + onlineChannels[channelName].status);
+                //listItem.append(getChannelLink(onlineChannels[channelName]));
+                channelLink = getChannelLink(onlineChannels[channelName]);
+                //listItem.text(channelLink);
+                listItem.append(channelLink);
+                onlineChannelsList.append(listItem);
+                //document.body.appendChild(channelLink[0]);
+            }
+        }
 
-        //if (searchResults._links && searchResults._links.self) {
-        //    displayHtml(searchResults._links.self);
-        //}
+        function getChannelLink(channel) {
+            var href,
+                channelNameAndStatus = channel.name + ' - ' + channel.status;
+
+            href = '<a href="' +
+                encodeURI(channel.url) +
+                '" target="_blank">' +
+                channelNameAndStatus +
+                '</a>';
+
+            return href;
+        }
+
+
     }
 
     function displayError(err) {

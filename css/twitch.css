@@ -21,6 +21,10 @@ a:visited {
     color: black;
 }
 
+a:hover {
+    text-decoration: underline;
+}
+
 button {
     margin-left: 20px;
 }
@@ -43,6 +47,12 @@ button {
 
 ul {
     margin-top: 3%;
+}
+
+li {
+    /*margin: 0; 
+    padding: 0;*/
+    text-align: left;
 }
 
 .centerContent {
