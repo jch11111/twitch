@@ -1,25 +1,16 @@
 var wikki = (function () {
-    var resultsDiv;
+    var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "thejwittz", "mineconstage", "rocketleague", "brucegrannec"]
+
 
     var init = function () {
         $(function () {
-            resultsDiv = $('#results');
-            addEventHandlers();
             RESPONSIVEUI.responsiveTabs();
-            $.when(getSearchResults())
-            .then(displayChannels, displayError);
+            $.when(getChannelInfo())
+            .then(displayChannels);
         })
     };
 
-    function addEventHandlers() {
-        $('button').click(function () {
-            searchButton_click();
-        });
-
-    }
-
-    function getSearchResults() {
-        var channelsOfINterest = ["ESL_SC2", "OgamingSC2", "cretetion", "freecodecamp", "storbeck", "habathcx", "RobotCaleb", "noobs2ninjas", "thejwittz", "mineconstage", "rocketleague", "brucegrannec"]
+    function getChannelInfo() {
             var searchUrl = "https://api.twitch.tv/kraken/streams?channel=" +
                 channelsOfINterest.join(",")
 
@@ -62,26 +53,37 @@ var wikki = (function () {
         });
 
         console.log(searchResults.streams.length);
-        displayOnlineChannels();
-        resultsDiv.empty();
-        
-        function displayOnlineChannels() {
+        displayOnlineChannels($('#onlineChannels').empty());
+        displayOfflineChannels($('#offlineChannels').empty());
+        displayAllChannels();
+
+        function displayOnlineChannels(whereToDisplay) {
             var channel,
                 listItem,
-                onlineChannelsList = $('#onlineChannels'),
                 channelLink;
 
-            onlineChannelsList.empty();
             for (channelName in onlineChannels) {
                 listItem = $('<li>');
-                //listItem.text(channelName + ' - ' + onlineChannels[channelName].status);
-                //listItem.append(getChannelLink(onlineChannels[channelName]));
                 channelLink = getChannelLink(onlineChannels[channelName]);
-                //listItem.text(channelLink);
                 listItem.append(channelLink);
-                onlineChannelsList.append(listItem);
-                //document.body.appendChild(channelLink[0]);
+                whereToDisplay.append(listItem);
             }
+        }
+
+        function displayOfflineChannels(whereToDisplay) {
+
+            channelsOfINterest.forEach(function (channelName) {
+                if (!onlineChannels[channelName]) {
+                    listItem = $('<li>');
+                    listItem.text(channelName);
+                    whereToDisplay.append(listItem);
+                }
+            });
+        }
+
+        function displayAllChannels() {
+            displayOnlineChannels($('#allChannels').empty());
+            displayOfflineChannels($('#allChannels'));
         }
 
         function getChannelLink(channel) {
@@ -96,19 +98,6 @@ var wikki = (function () {
 
             return href;
         }
-
-
-    }
-
-    function displayError(err) {
-        displayHtml(err);
-    }
-
-    function displayHtml(htmlContent) {
-        var newDiv = $('<div class="searchResult"></div>');
-
-        newDiv.html(htmlContent);
-        resultsDiv.append(newDiv);
     }
 
     return {
