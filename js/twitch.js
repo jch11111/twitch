@@ -42,7 +42,7 @@ var wikki = (function () {
                 return;
             }
 
-            onlineChannels[channel.name] = {
+            onlineChannels[channel.name.toLowerCase()] = {
                 name: channel.name,
                 url: channel.url || '#',
                 status: channel.status || 'status unavailable'
@@ -73,6 +73,7 @@ var wikki = (function () {
         function displayOfflineChannels(whereToDisplay) {
 
             channelsOfINterest.forEach(function (channelName) {
+                channelName = channelName.toLocaleLowerCase();
                 if (!onlineChannels[channelName]) {
                     listItem = $('<li>');
                     listItem.text(channelName);
